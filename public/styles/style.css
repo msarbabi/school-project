@@ -1,0 +1,35 @@
+@font-face {
+    font-family: "BYekan";
+    src: url("../fonts/BYekan-webfont.eot") format("eot"),
+        url("../fonts/BYekan-webfont.woff") format("woff"),
+        url("../fonts/BYekan-webfont.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    outline: none !important;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: "BYekan";
+    direction: rtl !important;
+}
+
+.header {
+    /* border-radius: 10px; */
+    box-shadow: 8px 8px 8px #8888883f;
+    background-color: #8cff66a2;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.cool {
+    /* for Card body */
+    margin: 20px auto 20px;
+}
+
+.header-brand > span {
+    margin-right: 0;
+}
