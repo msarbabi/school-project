@@ -17,7 +17,6 @@ const Header = ({ history }) => {
 
     return (
         <nav className='header navbar navbar-expand-lg navbar-light'>
-            {/* <p>{width}</p> */}
             {width <= 1000 ? (
                 <MobileHeader />
             ) : (

@@ -1,7 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Badge } from "reactstrap";
 
 const DesktopHeader = ({ pathname }) => {
+    const students = useSelector((state) => state.students);
+    const teachers = useSelector((state) => state.teachers);
+    const classes = useSelector((state) => state.classes);
+
     return (
         <div className='container'>
             <Link to='/'>
@@ -19,7 +25,10 @@ const DesktopHeader = ({ pathname }) => {
                         }
                     >
                         <Link to='/students' className='nav-link'>
-                            دانش آموزان
+                            دانش آموزان{" "}
+                            <Badge color='warning' pill>
+                                {students.length}
+                            </Badge>
                         </Link>
                     </li>
                     <li
@@ -30,7 +39,10 @@ const DesktopHeader = ({ pathname }) => {
                         }
                     >
                         <Link to='/teachers' className='nav-link'>
-                            معلمان
+                            معلمان{" "}
+                            <Badge color='warning' pill>
+                                {teachers.length}
+                            </Badge>
                         </Link>
                     </li>
                     <li
@@ -41,7 +53,10 @@ const DesktopHeader = ({ pathname }) => {
                         }
                     >
                         <Link to='/classes' className='nav-link'>
-                            کلاس ها
+                            کلاس ها{" "}
+                            <Badge color='warning' pill>
+                                {classes.length}
+                            </Badge>
                         </Link>
                     </li>
                 </ul>

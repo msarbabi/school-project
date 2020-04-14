@@ -5,11 +5,17 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
+    Badge,
 } from "reactstrap";
+import { useSelector } from "react-redux";
 
 const MobileHeader = () => {
     const [dropdownOpen, setOpen] = useState();
     const [width, setWidth] = useState(window.innerWidth);
+
+    const students = useSelector((state) => state.students);
+    const teachers = useSelector((state) => state.teachers);
+    const classes = useSelector((state) => state.classes);
 
     useEffect(() => {
         const handleResize = () => {
@@ -45,7 +51,10 @@ const MobileHeader = () => {
                             className='nav-link'
                             style={{ color: "black" }}
                         >
-                            معلمان
+                            معلمان{" "}
+                            <Badge color='warning' pill>
+                                {teachers.length}
+                            </Badge>
                         </Link>
                     </DropdownItem>
                     <DropdownItem divider />
@@ -55,7 +64,10 @@ const MobileHeader = () => {
                             className='nav-link'
                             style={{ color: "black" }}
                         >
-                            کلاس ها
+                            کلاس ها{" "}
+                            <Badge color='warning' pill>
+                                {classes.length}
+                            </Badge>
                         </Link>
                     </DropdownItem>
                     <DropdownItem divider />
@@ -66,7 +78,9 @@ const MobileHeader = () => {
                             style={{ color: "black" }}
                         >
                             دانش آموزان{" "}
-                            <span className='sr-only'>(current)</span>
+                            <Badge color='warning' pill>
+                                {students.length}
+                            </Badge>
                         </Link>
                     </DropdownItem>
                 </DropdownMenu>
