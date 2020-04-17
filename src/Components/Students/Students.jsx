@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import { useSelector } from "react-redux";
 import { Col, Card, CardTitle, CardBody, Button } from "reactstrap";
 
 import AddStudent from "./AddStudent";
 import StudentsTable from "./StudentsTable";
-import NotFoundStudents from "./NotFoundStudents";
+import NotFoundThing from "../Common/NotFoundThing";
+import { UtilsContext } from "../../context/utilsContext";
 
 const Students = () => {
-    const [width, setWidth] = useState(window.innerWidth);
     const [newStudent, setNewStudent] = useState(false);
+    const { windowWidth } = useContext(UtilsContext);
+    const studentsData = useSelector((state) => state.students);
 
-    useEffect(() => {
-        function handleResize() {
-            setWidth(window.innerWidth);
-        }
-        window.addEventListener("resize", handleResize);
-    });
-
-    const students = useSelector((state) => state.students);
     return (
-        <Col sm={width <= 1000 ? "12" : "8"} className='cool'>
+        <Col sm={windowWidth <= 1000 ? "12" : "8"} className='cool'>
             <Card
                 body
                 outline
@@ -28,10 +22,10 @@ const Students = () => {
             >
                 <CardTitle>لیست دانش آموزان</CardTitle>
                 <CardBody>
-                    {students.length === 0 ? (
-                        <NotFoundStudents width={width} />
+                    {studentsData.length === 0 ? (
+                        <NotFoundThing message='هیچ دانش آموزی وجود ندارد' />
                     ) : (
-                        <StudentsTable students={students} width={width} />
+                        <StudentsTable students={studentsData} />
                     )}
                 </CardBody>
                 <Button

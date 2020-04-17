@@ -3,8 +3,8 @@ import { Table } from "reactstrap";
 import { UtilsContext } from "../../context/utilsContext";
 import SetHeadTables from "../Common/setHeadTables";
 
-const StudentsTable = ({ students }) => {
-    const { studentTitles, studentTitlesMobile, windowWidth } = useContext(
+const TeachersTable = ({ teachers }) => {
+    const { teacherTitles, teacherTitlesMobile, windowWidth } = useContext(
         UtilsContext
     );
 
@@ -19,28 +19,26 @@ const StudentsTable = ({ students }) => {
         >
             <thead>
                 {windowWidth > 510 ? (
-                    <SetHeadTables feilds={studentTitles} />
+                    <SetHeadTables feilds={teacherTitles} />
                 ) : (
-                    <SetHeadTables feilds={studentTitlesMobile} />
+                    <SetHeadTables feilds={teacherTitlesMobile} />
                 )}
             </thead>
             <tbody>
-                {students.map((student) => (
-                    <tr key={student.id}>
-                        <th scope='row'>{student.id}</th>
-                        <td>{student.firstname}</td>
-                        <td>{student.lastname}</td>
+                {teachers.map((teacher) => (
+                    <tr key={teacher.id}>
+                        <th scope='row'>{teacher.id}</th>
+                        <td>{teacher.firstname}</td>
+                        <td>{teacher.lastname}</td>
                         {windowWidth <= 510 ? null : (
-                            <td>{student.fatherName}</td>
+                            <td>{teacher.fatherName}</td>
                         )}
                         {windowWidth <= 510 ? null : (
-                            <td>{student.shenasnameCode}</td>
+                            <td>{teacher.shenasnameCode}</td>
                         )}
                         {windowWidth <= 510 ? null : (
-                            <td>{student.classNumber}</td>
+                            <td>{teacher.classNumber}</td>
                         )}
-
-                        <td>۲۰</td>
                     </tr>
                 ))}
             </tbody>
@@ -48,4 +46,4 @@ const StudentsTable = ({ students }) => {
     );
 };
 
-export default StudentsTable;
+export default TeachersTable;
