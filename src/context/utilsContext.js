@@ -5,5 +5,5 @@ export const UtilsContext = createContext({
     studentTitles: [],
     studentTitlesMobile: [],
     teacherTitles: [],
-    classesTitles: [],
+    classTitles: [],
 });
