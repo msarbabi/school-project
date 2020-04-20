@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Col, FormGroup, Label, Input, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addStudent } from "../../redux/action/studentActions/addStudent";
+import { datepicker } from "./../../Utils/datepicker";
 
 const AddStudent = () => {
     const [firstname, setFirstname] = useState();
@@ -19,6 +20,8 @@ const AddStudent = () => {
     const dispatch = useDispatch();
 
     const len = useSelector((state) => state.students).length;
+    const classes = useSelector((state) => state.classes);
+    const { years, days, months } = datepicker();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -137,11 +140,17 @@ const AddStudent = () => {
                 </Label>
                 <Col sm={10}>
                     <Input
-                        type='text'
+                        type='select'
                         name='classNumber'
                         id='classNumber'
                         onChange={(e) => setClassNumber(e.target.value)}
-                    />
+                    >
+                        {classes.map((cls) => (
+                            <option key={cls.classNumber}>
+                                {cls.classNumber}
+                            </option>
+                        ))}
+                    </Input>
                 </Col>
             </FormGroup>
             <hr />
@@ -151,30 +160,42 @@ const AddStudent = () => {
                 </Label>
                 <Col sm={3}>
                     <Input
-                        type='text'
+                        type='select'
                         name='day'
                         id='day'
                         placeholder='روز'
                         onChange={(e) => setDay(e.target.value)}
-                    />
+                    >
+                        {days.map((day) => (
+                            <option key={day}>{day}</option>
+                        ))}
+                    </Input>
                 </Col>
                 <Col sm={3}>
                     <Input
-                        type='text'
+                        type='select'
                         name='month'
                         id='month'
                         placeholder='ماه'
                         onChange={(e) => setMonth(e.target.value)}
-                    />
+                    >
+                        {months.map((month) => (
+                            <option key={month}>{month}</option>
+                        ))}
+                    </Input>
                 </Col>
                 <Col sm={3}>
                     <Input
-                        type='text'
+                        type='select'
                         name='year'
                         id='year'
                         placeholder='سال'
                         onChange={(e) => setYear(e.target.value)}
-                    />
+                    >
+                        {years.map((year) => (
+                            <option key={year}>{year}</option>
+                        ))}
+                    </Input>
                 </Col>
             </FormGroup>
             <hr />

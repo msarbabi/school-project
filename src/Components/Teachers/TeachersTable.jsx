@@ -36,9 +36,7 @@ const TeachersTable = ({ teachers }) => {
                         {windowWidth <= 510 ? null : (
                             <td>{teacher.shenasnameCode}</td>
                         )}
-                        {windowWidth <= 510 ? null : (
-                            <td>{teacher.classNumber}</td>
-                        )}
+                        {windowWidth <= 510 ? null : <td>{teacher.lesson}</td>}
                     </tr>
                 ))}
             </tbody>

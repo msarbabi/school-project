@@ -1,6 +1,7 @@
 import axios from "axios";
 
 axios.defaults.headers.post["content-type"] = "application/json";
+axios.defaults.headers.put["content-type"] = "application/json";
 
 axios.interceptors.response.use(null, (error) => {
     const expectedError =
@@ -19,5 +20,6 @@ export default {
     get: axios.get,
     post: axios.post,
     put: axios.put,
+    patch: axios.patch,
     delete: axios.delete,
 };

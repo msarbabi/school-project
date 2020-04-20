@@ -11,6 +11,7 @@ const AddClass = () => {
 
     const dispatch = useDispatch();
     const len = useSelector((state) => state.classes).length;
+    const teachers = useSelector((state) => state.teachers);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -68,11 +69,17 @@ const AddClass = () => {
                 </Label>
                 <Col sm={10}>
                     <Input
-                        type='text'
+                        type='select'
                         name='teacherName'
                         id='teacherName'
                         onChange={(e) => setTeacherName(e.target.value)}
-                    />
+                    >
+                        {teachers.map((teacher) => (
+                            <option
+                                key={teacher.id}
+                            >{`${teacher.firstname} ${teacher.lastname}`}</option>
+                        ))}
+                    </Input>
                 </Col>
             </FormGroup>
             <hr />
