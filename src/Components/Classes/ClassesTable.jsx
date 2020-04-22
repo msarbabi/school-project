@@ -24,6 +24,7 @@ const ClassesTable = ({ classes }) => {
                         <th scope='row'>{myClass.id}</th>
                         <td>{myClass.classLesson}</td>
                         <td>{myClass.classNumber}</td>
+                        <td>{myClass.students.length}</td>
                         <td>{myClass.teacherName}</td>
                     </tr>
                 ))}

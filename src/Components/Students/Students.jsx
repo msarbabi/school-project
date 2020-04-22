@@ -11,6 +11,7 @@ const Students = () => {
     const [newStudent, setNewStudent] = useState(false);
     const { windowWidth } = useContext(UtilsContext);
     const studentsData = useSelector((state) => state.students);
+    const cls = useSelector((state) => state.classes);
 
     return (
         <Col sm={windowWidth <= 1000 ? "12" : "8"} className='cool'>
@@ -28,15 +29,28 @@ const Students = () => {
                         <StudentsTable students={studentsData} />
                     )}
                 </CardBody>
-                <Button
-                    block
-                    color='success'
-                    onClick={() => setNewStudent(!newStudent)}
-                    className='m-auto'
-                    style={{ width: "97%" }}
-                >
-                    دانش آموز جدید
-                </Button>
+                {cls.length ? (
+                    <Button
+                        block
+                        color='success'
+                        onClick={() => setNewStudent(!newStudent)}
+                        className='m-auto'
+                        style={{ width: "97%" }}
+                    >
+                        دانش آموز جدید
+                    </Button>
+                ) : (
+                    <Button
+                        block
+                        color='success'
+                        onClick={() => setNewStudent(!newStudent)}
+                        className='m-auto'
+                        style={{ width: "97%" }}
+                        disabled
+                    >
+                        دانش آموز جدید
+                    </Button>
+                )}
                 {newStudent ? <AddStudent /> : null}
             </Card>
         </Col>

@@ -20,6 +20,7 @@ const AddClass = () => {
             classNumber,
             teacherName,
             classInfo,
+            students: [],
             id: len + 1,
         };
         dispatch(addClass(myClass));

@@ -9,7 +9,9 @@ import ClassesTable from "./ClassesTable";
 const Classes = () => {
     const [newClasses, setNewClasses] = useState(false);
     const classes = useSelector((state) => state.classes);
+    const teachers = useSelector((state) => state.teachers);
     const { windowWidth } = useContext(UtilsContext);
+
     return (
         <Col sm={windowWidth <= 1000 ? "12" : "8"} className='cool'>
             <Card
@@ -29,15 +31,29 @@ const Classes = () => {
                         <ClassesTable classes={classes} />
                     )}
                 </CardBody>
-                <Button
-                    block
-                    color='success'
-                    onClick={() => setNewClasses(!newClasses)}
-                    className='m-auto'
-                    style={{ width: "97%" }}
-                >
-                    کلاس جدید
-                </Button>
+                {teachers.length ? (
+                    <Button
+                        block
+                        color='success'
+                        onClick={() => setNewClasses(!newClasses)}
+                        className='m-auto'
+                        style={{ width: "97%" }}
+                    >
+                        کلاس جدید
+                    </Button>
+                ) : (
+                    <Button
+                        block
+                        color='success'
+                        onClick={() => setNewClasses(!newClasses)}
+                        className='m-auto'
+                        style={{ width: "97%" }}
+                        disabled
+                    >
+                        کلاس جدید
+                    </Button>
+                )}
+
                 {newClasses ? <AddClass /> : null}
             </Card>
         </Col>

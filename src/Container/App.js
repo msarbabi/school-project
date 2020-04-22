@@ -32,8 +32,8 @@ function App() {
         "شماره شناسنامه",
         "درس",
     ];
-    const steacherTitlesMobile = ["#", "نام", "نام خانوادگی"];
-    const classTitles = ["#", "نام کلاس", "شماره کلاس", "نام دبیر"];
+    const teacherTitlesMobile = ["#", "نام", "نام خانوادگی"];
+    const classTitles = ["#", "نام کلاس", "شماره کلاس", "جمعیت", "نام دبیر"];
     useEffect(() => {
         function handleResize() {
             setWidth(window.innerWidth);
@@ -47,7 +47,7 @@ function App() {
                 studentTitles,
                 studentTitlesMobile,
                 teacherTitles,
-                steacherTitlesMobile,
+                teacherTitlesMobile,
                 classTitles,
             }}
         >

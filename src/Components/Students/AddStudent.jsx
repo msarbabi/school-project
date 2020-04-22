@@ -37,7 +37,7 @@ const AddStudent = () => {
             id: len + 1,
             birthday: `${year}/${month}/${day}`,
         };
-        dispatch(addStudent(student));
+        dispatch(addStudent(student, classNumber));
     };
 
     return (
@@ -146,9 +146,7 @@ const AddStudent = () => {
                         onChange={(e) => setClassNumber(e.target.value)}
                     >
                         {classes.map((cls) => (
-                            <option key={cls.classNumber}>
-                                {cls.classNumber}
-                            </option>
+                            <option key={cls.id}>{cls.classNumber}</option>
                         ))}
                     </Input>
                 </Col>
