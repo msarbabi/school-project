@@ -18,7 +18,9 @@ const AddClass = () => {
         const myClass = {
             classLesson,
             classNumber,
-            teacherName,
+            teacherName: teacherName
+                ? teacherName
+                : document.getElementById("teacherName").value,
             classInfo,
             students: [],
             id: len + 1,
