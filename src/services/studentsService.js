@@ -8,3 +8,7 @@ export const getAllStudents = () => {
 export const setStudent = (student) => {
     return http.post(`${config.localUrl}/students`, student);
 };
+
+export const getStudent = (id) => {
+    return http.get(`${config.localUrl}/students?id=${id}`);
+};

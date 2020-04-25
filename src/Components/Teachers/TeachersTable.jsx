@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Table } from "reactstrap";
 import { UtilsContext } from "../../context/utilsContext";
 import SetHeadTables from "../Common/setHeadTables";
+import { Link } from "react-router-dom";
 
 const TeachersTable = ({ teachers }) => {
     const { teacherTitles, teacherTitlesMobile, windowWidth } = useContext(
@@ -37,6 +38,14 @@ const TeachersTable = ({ teachers }) => {
                             <td>{teacher.shenasnameCode}</td>
                         )}
                         {windowWidth <= 510 ? null : <td>{teacher.lesson}</td>}
+                        <td>
+                            <Link
+                                to={`/teachers/${teacher.id}`}
+                                className='table-links'
+                            >
+                                جزییات
+                            </Link>
+                        </td>
                     </tr>
                 ))}
             </tbody>

@@ -32,12 +32,16 @@ const AddStudent = () => {
             shenasnameCode,
             fatherNumber,
             homeNumber,
-            classNumber,
+            classNumber: classNumber
+                ? classNumber
+                : document.getElementById("classNumber").value,
             studentInfo,
             id: len + 1,
-            birthday: `${year}/${month}/${day}`,
+            birthday: `${year ? year : document.getElementById("year").value}/${
+                month ? month : document.getElementById("month").value
+            }/${day ? day : document.getElementById("day").value}`,
         };
-        dispatch(addStudent(student, classNumber));
+        dispatch(addStudent(student));
     };
 
     return (

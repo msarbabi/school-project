@@ -13,6 +13,10 @@ export const getClass = (classNumber) => {
     return http.get(`${config.localUrl}/classes?classNumber=${classNumber}`);
 };
 
+export const getClassById = (classId) => {
+    return http.get(`${config.localUrl}/classes?id=${classId}`);
+};
+
 export const updateClass = (cls, id) => {
     return http.patch(`${config.localUrl}/classes/${id}`, cls);
 };

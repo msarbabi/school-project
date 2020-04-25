@@ -1,10 +1,10 @@
 import { setStudent } from "../../../services/studentsService";
 import { getClass, updateClass } from "../../../services/classService";
 
-export const addStudent = (student, classNumber) => {
+export const addStudent = (student) => {
     return async (dispatch, getState) => {
         const students = [...getState().students];
-        const cls = await getClass(classNumber);
+        const cls = await getClass(student.classNumber);
         cls.data[0].students.push(student);
         const upd = await updateClass(cls.data[0], cls.data[0].id);
         if (upd.status === 200) {

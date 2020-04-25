@@ -28,9 +28,17 @@ body {
 .cool {
     /* for Card body */
     margin: 50px auto 50px;
-    /* width: 60%; */
 }
 
 .header-brand > span {
     margin-right: 0;
+}
+
+.table-links,
+.table-links:hover,
+.table-links:active,
+.table-links:visited {
+    outline: none !important;
+    color: black !important;
+    cursor: pointer !important;
 }

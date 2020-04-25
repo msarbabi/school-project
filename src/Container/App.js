@@ -22,8 +22,9 @@ function App() {
         "شماره شناسنامه",
         "کلاس",
         "معدل",
+        "...",
     ];
-    const studentTitlesMobile = ["#", "نام", "نام خانوادگی", "معدل"];
+    const studentTitlesMobile = ["#", "نام", "نام خانوادگی", "معدل", "..."];
     const teacherTitles = [
         "#",
         "نام",
@@ -31,9 +32,17 @@ function App() {
         "نام پدر",
         "شماره شناسنامه",
         "درس",
+        "...",
     ];
-    const teacherTitlesMobile = ["#", "نام", "نام خانوادگی"];
-    const classTitles = ["#", "نام کلاس", "شماره کلاس", "جمعیت", "نام دبیر"];
+    const teacherTitlesMobile = ["#", "نام", "نام خانوادگی", "..."];
+    const classTitles = [
+        "#",
+        "نام کلاس",
+        "شماره کلاس",
+        "جمعیت",
+        "نام دبیر",
+        "...",
+    ];
     useEffect(() => {
         function handleResize() {
             setWidth(window.innerWidth);

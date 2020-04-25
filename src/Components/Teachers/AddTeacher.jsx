@@ -28,7 +28,9 @@ const AddTeacher = () => {
             shenasnameCode,
             lesson,
             id: len + 1,
-            birthday: `${year}/${month}/${day}`,
+            birthday: `${year ? year : document.getElementById("year").value}/${
+                month ? month : document.getElementById("month").value
+            }/${day ? day : document.getElementById("day").value}`,
         };
         dispatch(addTeacher(teacher));
     };
