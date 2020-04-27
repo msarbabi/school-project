@@ -1,9 +1,5 @@
 warning: before to use project please install json-server with https://github.com/typicode/json-server and run json-server on port 3000
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 6430b42165d6b1e0954d8eb3f9a56535e717e47e
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

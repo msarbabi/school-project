@@ -17,7 +17,7 @@ const School = () => {
                 <Route exact path='/teachers' component={Teachers} />
                 <Route exact path='/students/:id' component={MyStudent} />
                 <Route exact path='/students' component={Students} />
-                <Route exact path='/classes/:id' component={MyClass} />
+                <Route exact path='/class/:id' component={MyClass} />
                 <Route exact path='/classes' component={Classes} />
                 <Route exact path='/not-found' component={NotFound} />
                 <Route exact path='/' component={Main} />

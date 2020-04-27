@@ -29,7 +29,7 @@ const ClassesTable = ({ classes }) => {
                         <td>{myClass.teacherName}</td>
                         <td>
                             <Link
-                                to={`/classes/${myClass.id}`}
+                                to={`/class/${myClass.id}`}
                                 className='table-links'
                             >
                                 جزییات
