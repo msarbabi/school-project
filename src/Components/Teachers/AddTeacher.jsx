@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Form, Col, FormGroup, Label, Input, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
+import SimpleReactValidator from "simple-react-validator";
+
 import { addTeacher } from "../../redux/action/teacherActions/addTeacher";
 import { datepicker } from "../../Utils/datepicker";
+import { convertToEnglish } from "../../Utils/convertNumber";
 
 const AddTeacher = () => {
     const [firstname, setFirstname] = useState();
@@ -13,8 +16,21 @@ const AddTeacher = () => {
     const [year, setYear] = useState();
     const [month, setMonth] = useState();
     const [day, setDay] = useState();
+    const [, forceUpdate] = useState();
 
     const dispatch = useDispatch();
+
+    const validator = useRef(
+        new SimpleReactValidator({
+            messages: {
+                required: "پر کردن این فیلد الزامی است.",
+                min: "تعداد کاراکتر کمتر از حد مجاز است.",
+                max: "تعداد کاراکتر بیش از حد مجاز است.",
+                integer: "لطفا عدد وارد کنید.",
+            },
+            element: (message) => <div style={{ color: "red" }}>{message}</div>,
+        })
+    );
 
     const len = useSelector((state) => state.teachers).length;
     const { days, months, years } = datepicker();
@@ -32,7 +48,18 @@ const AddTeacher = () => {
                 month ? month : document.getElementById("month").value
             }/${day ? day : document.getElementById("day").value}`,
         };
-        dispatch(addTeacher(teacher));
+
+        if (validator.current.allValid()) {
+            dispatch(addTeacher(teacher));
+        } else {
+            validator.current.showMessageFor("firstname");
+            validator.current.showMessageFor("lastname");
+            validator.current.showMessageFor("fatherName");
+            validator.current.showMessageFor("shenasnameCode");
+            validator.current.showMessageFor("lesson");
+
+            forceUpdate(1);
+        }
     };
 
     return (
@@ -54,8 +81,16 @@ const AddTeacher = () => {
                         type='text'
                         name='firstname'
                         id='firstname'
-                        onChange={(e) => setFirstname(e.target.value)}
+                        onChange={(e) => {
+                            setFirstname(e.target.value);
+                            validator.current.showMessageFor("firstname");
+                        }}
                     />
+                    {validator.current.message(
+                        "firstname",
+                        firstname,
+                        "required|min:3"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
@@ -68,8 +103,16 @@ const AddTeacher = () => {
                         type='text'
                         name='lastname'
                         id='lastname'
-                        onChange={(e) => setLastname(e.target.value)}
+                        onChange={(e) => {
+                            setLastname(e.target.value);
+                            validator.current.showMessageFor("lastname");
+                        }}
                     />
+                    {validator.current.message(
+                        "lastname",
+                        lastname,
+                        "required|min:3"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
@@ -82,8 +125,16 @@ const AddTeacher = () => {
                         type='text'
                         name='fatherName'
                         id='fatherName'
-                        onChange={(e) => setFatherName(e.target.value)}
+                        onChange={(e) => {
+                            setFatherName(e.target.value);
+                            validator.current.showMessageFor("fatherName");
+                        }}
                     />
+                    {validator.current.message(
+                        "fatherName",
+                        fatherName,
+                        "required|min:3"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
@@ -96,8 +147,16 @@ const AddTeacher = () => {
                         type='text'
                         name='shenasnameCode'
                         id='shenasnameCode'
-                        onChange={(e) => setShenasnameCode(e.target.value)}
+                        onChange={(e) => {
+                            setShenasnameCode(convertToEnglish(e.target.value));
+                            validator.current.showMessageFor("shenasnameCode");
+                        }}
                     />
+                    {validator.current.message(
+                        "shenasnameCode",
+                        shenasnameCode,
+                        "required|integer|min:10|max:10"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
@@ -110,14 +169,22 @@ const AddTeacher = () => {
                         type='text'
                         name='lesson'
                         id='lesson'
-                        onChange={(e) => setLesson(e.target.value)}
+                        onChange={(e) => {
+                            setLesson(e.target.value);
+                            validator.current.showMessageFor("lesson");
+                        }}
                     />
+                    {validator.current.message(
+                        "lesson",
+                        lesson,
+                        "required|min:2"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
 
             <FormGroup row>
-                <Label for='shenasnameCode' sm={3}>
+                <Label for='birthday' sm={3}>
                     تاریخ تولد
                 </Label>
                 <Col sm={3}>

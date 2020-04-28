@@ -12,13 +12,14 @@ const MyClass = ({ match }) => {
     const dispatch = useDispatch();
 
     const { windowWidth } = useContext(UtilsContext);
-    const [classData, setClassData] = useState();
+    // const [classData, setClassData] = useState();
 
     useEffect(() => {
         dispatch(findClass(match.params.id));
-        console.log(cls);
-    }, []);
+        // console.log(cls);
+    }, [match.params.id]);
 
+    console.log(cls);
     // setClassData(cls);
 
     return (
@@ -34,23 +35,23 @@ const MyClass = ({ match }) => {
                 }}
             >
                 <CardHeader style={{ textAlign: "center", width: "100%" }}>
-                    کلاس {classData ? classData.classLesson : null}
+                    کلاس {cls ? cls.classLesson : null}
                 </CardHeader>
-                <CardTitle style={{ marginTop: "3%", direction: "rtl " }}>
-                    جمعیت: {classData ? classData.students.length : null}
+                {/* <CardTitle style={{ marginTop: "3%", direction: "rtl " }}>
+                    جمعیت: {cls ? cls.students.length : null}
                 </CardTitle>
                 <CardBody>
-                    {classData ? (
-                        classData.students.length === 0 ? (
+                    {cls ? (
+                        cls.students.length === 0 ? (
                             <NotFoundThing
                                 width={windowWidth}
                                 message='در این کلاس هیچ دانش آموزی وجود ندارد.'
                             />
                         ) : (
-                            <StudentsTable students={classData.students} />
+                            <StudentsTable students={cls.students} />
                         )
                     ) : null}
-                </CardBody>
+                </CardBody> */}
             </Card>
         </Col>
     );

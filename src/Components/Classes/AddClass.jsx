@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Col, FormGroup, Label, Input, Button } from "reactstrap";
+import SimpleReactValidator from "simple-react-validator";
+
 import { addClass } from "../../redux/action/classActions/addClass";
+import { convertToEnglish } from "../../Utils/convertNumber";
 
 const AddClass = () => {
     const [classLesson, setClassLesson] = useState();
     const [classNumber, setClassNumber] = useState();
     const [teacherName, setTeacherName] = useState();
     const [classInfo, setClassInfo] = useState();
+    const [, forceUpdate] = useState();
+
+    const validator = useRef(
+        new SimpleReactValidator({
+            messages: {
+                required: "پر کردن این فیلد الزامی است.",
+                min: "شماره کلاس باید ۳ رقمی باشد.",
+                max: "شماره کلاس باید ۳ رقمی باشد.",
+                integer: "شماره کلاس باید عدد باشد.",
+            },
+            element: (message) => <div style={{ color: "red" }}>{message}</div>,
+        })
+    );
 
     const dispatch = useDispatch();
     const len = useSelector((state) => state.classes).length;
@@ -25,7 +41,14 @@ const AddClass = () => {
             students: [],
             id: len + 1,
         };
-        dispatch(addClass(myClass));
+        if (validator.current.allValid()) {
+            dispatch(addClass(myClass));
+        } else {
+            validator.current.showMessageFor("classLesson");
+            validator.current.showMessageFor("classNumber");
+
+            forceUpdate(1);
+        }
     };
 
     return (
@@ -47,8 +70,16 @@ const AddClass = () => {
                         type='text'
                         name='classLesson'
                         id='classLesson'
-                        onChange={(e) => setClassLesson(e.target.value)}
+                        onChange={(e) => {
+                            setClassLesson(e.target.value);
+                            validator.current.showMessageFor("classLesson");
+                        }}
                     />
+                    {validator.current.message(
+                        "classLesson",
+                        classLesson,
+                        "required|min:2"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
@@ -61,8 +92,16 @@ const AddClass = () => {
                         type='text'
                         name='classNumber'
                         id='classNumber'
-                        onChange={(e) => setClassNumber(e.target.value)}
+                        onChange={(e) => {
+                            setClassNumber(convertToEnglish(e.target.value));
+                            validator.current.showMessageFor("classNumber");
+                        }}
                     />
+                    {validator.current.message(
+                        "classNumber",
+                        classNumber,
+                        "required|integer|min:3|max:3"
+                    )}
                 </Col>
             </FormGroup>
             <hr />

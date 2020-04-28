@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Form, Col, FormGroup, Label, Input, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
+import SimpleReactValidator from "simple-react-validator";
+
 import { addStudent } from "../../redux/action/studentActions/addStudent";
-import { datepicker } from "./../../Utils/datepicker";
+import { datepicker } from "../../Utils/datepicker";
+import { convertToEnglish } from "../../Utils/convertNumber";
 
 const AddStudent = () => {
     const [firstname, setFirstname] = useState();
@@ -16,12 +19,25 @@ const AddStudent = () => {
     const [month, setMonth] = useState();
     const [day, setDay] = useState();
     const [studentInfo, setStudentInfo] = useState();
+    const [, forceUpdate] = useState();
 
     const dispatch = useDispatch();
 
     const len = useSelector((state) => state.students).length;
     const classes = useSelector((state) => state.classes);
     const { years, days, months } = datepicker();
+
+    const validator = useRef(
+        new SimpleReactValidator({
+            messages: {
+                required: "پر کردن این فیلد الزامی است.",
+                min: "تعداد کاراکتر کمتر از حد مجاز است.",
+                max: "تعداد کاراکتر بیش از حد مجاز است.",
+                integer: "لطفا عدد وارد کنید.",
+            },
+            element: (message) => <div style={{ color: "red" }}>{message}</div>,
+        })
+    );
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -41,7 +57,18 @@ const AddStudent = () => {
                 month ? month : document.getElementById("month").value
             }/${day ? day : document.getElementById("day").value}`,
         };
-        dispatch(addStudent(student));
+        if (validator.current.allValid()) {
+            dispatch(addStudent(student));
+        } else {
+            validator.current.showMessageFor("firstname");
+            validator.current.showMessageFor("lastname");
+            validator.current.showMessageFor("fatherName");
+            validator.current.showMessageFor("shenasnameCode");
+            validator.current.showMessageFor("fatherNumber");
+            validator.current.showMessageFor("homeNumber");
+
+            forceUpdate(1);
+        }
     };
 
     return (
@@ -63,8 +90,16 @@ const AddStudent = () => {
                         type='text'
                         name='firstname'
                         id='firstname'
-                        onChange={(e) => setFirstname(e.target.value)}
+                        onChange={(e) => {
+                            setFirstname(e.target.value);
+                            validator.current.showMessageFor("firstname");
+                        }}
                     />
+                    {validator.current.message(
+                        "firstname",
+                        firstname,
+                        "required|min:2"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
@@ -77,8 +112,16 @@ const AddStudent = () => {
                         type='text'
                         name='lastname'
                         id='lastname'
-                        onChange={(e) => setLastname(e.target.value)}
+                        onChange={(e) => {
+                            setLastname(e.target.value);
+                            validator.current.showMessageFor("lastname");
+                        }}
                     />
+                    {validator.current.message(
+                        "lastname",
+                        lastname,
+                        "required|min:2"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
@@ -91,8 +134,16 @@ const AddStudent = () => {
                         type='text'
                         name='fatherName'
                         id='fatherName'
-                        onChange={(e) => setFatherName(e.target.value)}
+                        onChange={(e) => {
+                            setFatherName(e.target.value);
+                            validator.current.showMessageFor("fatherName");
+                        }}
                     />
+                    {validator.current.message(
+                        "fatherName",
+                        fatherName,
+                        "required|min:2"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
@@ -105,8 +156,16 @@ const AddStudent = () => {
                         type='text'
                         name='shenasnameCode'
                         id='shenasnameCode'
-                        onChange={(e) => setShenasnameCode(e.target.value)}
+                        onChange={(e) => {
+                            setShenasnameCode(convertToEnglish(e.target.value));
+                            validator.current.showMessageFor("shenasnameCode");
+                        }}
                     />
+                    {validator.current.message(
+                        "shenasnameCode",
+                        shenasnameCode,
+                        "required|integer|min:10|max:10"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
@@ -119,8 +178,16 @@ const AddStudent = () => {
                         type='text'
                         name='fatherNumber'
                         id='fatherNumber'
-                        onChange={(e) => setFatherNumber(e.target.value)}
+                        onChange={(e) => {
+                            setFatherNumber(convertToEnglish(e.target.value));
+                            validator.current.showMessageFor("fatherName");
+                        }}
                     />
+                    {validator.current.message(
+                        "fatherNumber",
+                        fatherNumber,
+                        "required|integer|min:11|max:11"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
@@ -133,8 +200,16 @@ const AddStudent = () => {
                         type='text'
                         name='homeNumber'
                         id='homeNumber'
-                        onChange={(e) => setHomeNumber(e.target.value)}
+                        onChange={(e) => {
+                            setHomeNumber(convertToEnglish(e.target.value));
+                            validator.current.showMessageFor("homeNumber");
+                        }}
                     />
+                    {validator.current.message(
+                        "homeNumber",
+                        homeNumber,
+                        "required|integer|min:11|max:11"
+                    )}
                 </Col>
             </FormGroup>
             <hr />
