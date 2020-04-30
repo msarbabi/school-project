@@ -17,10 +17,11 @@ const MyClass = ({ match }) => {
     useEffect(() => {
         dispatch(findClass(match.params.id));
         // console.log(cls);
+        // setClassData(cls);
     }, [match.params.id]);
 
-    console.log(cls);
-    // setClassData(cls);
+    // console.log(cls);
+    // console.log(classData);
 
     return (
         <Col sm={windowWidth <= 1000 ? "12" : "8"} className='cool'>
