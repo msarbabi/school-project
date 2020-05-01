@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from "react";
-import { Col, Card, CardText } from "reactstrap";
+import { Col, Card } from "reactstrap";
 import { UtilsContext } from "../../context/utilsContext";
 import { useSelector } from "react-redux";
 

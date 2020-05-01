@@ -13,7 +13,7 @@ const School = () => {
     return (
         <Fragment>
             <Switch>
-                <Route exact path='/teachers/:is' component={MyTeacher} />
+                <Route exact path='/teachers/:id' component={MyTeacher} />
                 <Route exact path='/teachers' component={Teachers} />
                 <Route exact path='/students/:id' component={MyStudent} />
                 <Route exact path='/students' component={Students} />
