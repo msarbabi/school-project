@@ -4,11 +4,14 @@ import { Card, Col, CardHeader, CardTitle } from "reactstrap";
 
 import { findStudent } from "../../redux/action/studentActions/findStudent";
 import { UtilsContext } from "../../context/utilsContext";
+import ClassesTable from "../Classes/ClassesTable";
+import NotFoundThing from "../Common/NotFoundThing";
 
 const MyStudent = ({ match }) => {
     const dispatch = useDispatch();
 
     const student = useSelector((state) => state.myStudent);
+    const classes = useSelector((state) => state.classes);
 
     const { windowWidth } = useContext(UtilsContext);
 
@@ -26,7 +29,7 @@ const MyStudent = ({ match }) => {
                         outline
                         color='success'
                         style={{
-                            padding: "0",
+                            padding: "0 0 3%",
                         }}
                     >
                         <CardHeader
@@ -52,6 +55,23 @@ const MyStudent = ({ match }) => {
                                     <i>{student.studentInfo}</i> <br />
                                 </p>
                             ) : null}
+                            <hr />
+                            <CardHeader
+                                style={{
+                                    textAlign: "center",
+                                    backgroundColor: "#e0ebeb",
+                                }}
+                            >
+                                {`لیست کلاس های ${student.firstname} ${student.lastname}`}
+                            </CardHeader>
+                            {classes.length !== 0 ? (
+                                <ClassesTable classes={classes} />
+                            ) : (
+                                <NotFoundThing
+                                    message={`${student.firstname} ${student.lastname} در هیج کلاسی حضور ندارد.`}
+                                    width={windowWidth}
+                                />
+                            )}
                         </CardTitle>
                     </Card>
                 </Col>
